@@ -185,7 +185,10 @@ console.log({
 Display app statistics:
 
 ```typescript
-const { appData } = useAuth();
+const { keyauth } = useAuth();
+
+// Access app data
+const appData = keyauth?.app_data;
 
 console.log({
   numUsers: appData?.numUsers,
@@ -199,22 +202,22 @@ console.log({
 ## **Session Management**
 
 ```typescript
-const { logout, checkSession } = useAuth();
+const { logout, keyauth } = useAuth();
 
 // Check if session is valid
-const isValid = await checkSession();
+const isValid = await keyauth?.check();
 
 // Logout user
-await logout();
+logout();
 ```
 
 ## **Security Features**
 
 ### **Blacklist Check**
 ```typescript
-const { checkBlacklist } = useAuth();
+const { keyauth } = useAuth();
 
-const isBlacklisted = await checkBlacklist();
+const isBlacklisted = await keyauth?.checkblacklist();
 if (isBlacklisted) {
   // Handle blacklisted user
 }
@@ -222,10 +225,10 @@ if (isBlacklisted) {
 
 ### **Ban User**
 ```typescript
-const { ban } = useAuth();
+const { keyauth } = useAuth();
 
 // Ban current user (must be logged in)
-await ban();
+await keyauth?.ban();
 ```
 
 ## **Logging**
@@ -233,37 +236,37 @@ await ban();
 Send logs to KeyAuth dashboard:
 
 ```typescript
-const { log } = useAuth();
+const { keyauth } = useAuth();
 
-await log("User performed action X");
+await keyauth?.log("User performed action X");
 ```
 
 ## **Variables**
 
 ### **Application Variables**
 ```typescript
-const { getVar } = useAuth();
+const { keyauth } = useAuth();
 
-const value = await getVar("variableName");
+const value = await keyauth?.var("variableName");
 ```
 
 ### **User Variables**
 ```typescript
-const { getUserVar, setUserVar } = useAuth();
+const { keyauth } = useAuth();
 
 // Get user variable
-const userValue = await getUserVar("varName");
+const userValue = await keyauth?.getvar("varName");
 
 // Set user variable
-await setUserVar("varName", "varValue");
+await keyauth?.setvar("varName", "varValue");
 ```
 
 ## **File Downloads**
 
 ```typescript
-const { downloadFile } = useAuth();
+const { keyauth } = useAuth();
 
-const fileBytes = await downloadFile("fileId");
+const fileBytes = await keyauth?.file("fileId");
 // Handle file bytes as needed
 ```
 
@@ -271,19 +274,19 @@ const fileBytes = await downloadFile("fileId");
 
 ### **Get Chat Messages**
 ```typescript
-const { getChatMessages } = useAuth();
+const { keyauth } = useAuth();
 
-const messages = await getChatMessages("channelName");
-messages.forEach(msg => {
+const messages = await keyauth?.chatGet("channelName");
+messages?.forEach(msg => {
   console.log(`${msg.author}: ${msg.message}`);
 });
 ```
 
 ### **Send Chat Message**
 ```typescript
-const { sendChatMessage } = useAuth();
+const { keyauth } = useAuth();
 
-await sendChatMessage("Hello everyone!", "channelName");
+await keyauth?.chatSend("Hello everyone!", "channelName");
 ```
 
 ## **Webhooks**
@@ -291,13 +294,13 @@ await sendChatMessage("Hello everyone!", "channelName");
 Send secure server-side requests:
 
 ```typescript
-const { webhook } = useAuth();
+const { keyauth } = useAuth();
 
 // GET request
-const response1 = await webhook("webhookId", "&param=value");
+const response1 = await keyauth?.webhook("webhookId", "&param=value");
 
 // POST with form data
-const response2 = await webhook(
+const response2 = await keyauth?.webhook(
   "webhookId", 
   "", 
   "key=value&key2=value2", 
@@ -305,7 +308,7 @@ const response2 = await webhook(
 );
 
 // POST with JSON
-const response3 = await webhook(
+const response3 = await keyauth?.webhook(
   "webhookId",
   "",
   JSON.stringify({ message: "Hello" }),
