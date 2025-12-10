@@ -229,6 +229,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = () => {
     console.log('[Auth Debug] Logging out user');
+    await keyauth.logout();
     setUser(null);
     setIsAuthenticated(false);
     sessionStorage.clearAll();
