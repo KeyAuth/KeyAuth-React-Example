@@ -227,9 +227,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { success: result.success, message: result.message };
   };
 
-  const logout = () => {
+  const logout = async () => {
     console.log('[Auth Debug] Logging out user');
-    await keyauth.logout();
+    if (keyauth) {
+      try {
+        await keyauth.logout();
+        await keyauth.init();
+        console.log('[Auth Debug] KeyAuth reinitialized after logout');
+      } catch (error) {
+        console.error('[Auth Debug] Error during logout:', error);
+      }
+    }
     setUser(null);
     setIsAuthenticated(false);
     sessionStorage.clearAll();
