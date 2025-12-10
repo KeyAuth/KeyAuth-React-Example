@@ -48,48 +48,6 @@ export default class KeyAuth {
     }
   }
 
-  get_hwid(): string {
-    // Browser-compatible HWID generation
-    // Use a combination of navigator properties and localStorage
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    if (ctx) {
-      ctx.textBaseline = 'top';
-      ctx.font = '14px Arial';
-      ctx.fillText('Browser HWID', 2, 2);
-    }
-    
-    const fingerprint = [
-      navigator.userAgent,
-      navigator.language,
-      navigator.platform,
-      navigator.hardwareConcurrency,
-      screen.width + 'x' + screen.height,
-      screen.colorDepth,
-      new Date().getTimezoneOffset(),
-      canvas.toDataURL()
-    ].join('|');
-    
-    // Create a simple hash from the fingerprint
-    let hash = 0;
-    for (let i = 0; i < fingerprint.length; i++) {
-      const char = fingerprint.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
-      hash = hash & hash; // Convert to 32-bit integer
-    }
-    
-    // Convert to a more readable format
-    const hwid = Math.abs(hash).toString(16).toUpperCase().padStart(8, '0');
-    
-    // Store in localStorage for consistency
-    const stored = localStorage.getItem('keyauth_hwid');
-    if (!stored) {
-      localStorage.setItem('keyauth_hwid', hwid);
-      return hwid;
-    }
-    return stored;
-  }
-
   async init() {
     if (this.sessionid && this.initialized) {
       return { success: true, message: "Application already initialized" };
@@ -355,14 +313,12 @@ export default class KeyAuth {
 
   async checkblacklist() {
     this.checkinit();
-    const hwid = this.get_hwid();
     
     const post_data = {
       "type": "checkblacklist",
       "name": this.name,
       "ownerid": this.ownerid,
       "sessionid": this.sessionid,
-      "hwid": hwid,
     };
 
     const response = await this.__do_request(post_data) as any;
