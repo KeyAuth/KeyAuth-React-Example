@@ -21,7 +21,7 @@ KeyAuth React/Next.js TypeScript example application with full 2FA support for h
 1. **Clone the repository**
    ```bash
    git clone https://github.com/KeyAuth/KeyAuth-React-Example.git
-   cd KeyAuth-React-Example/keyauth-react
+   cd KeyAuth-React-Example
    ```
 
 2. **Install dependencies**
@@ -403,7 +403,3 @@ Thank you for your compliance, we work hard on the development of KeyAuth and do
 - 💬 [Telegram Community](https://t.me/keyauth)
 - 🐛 [Bug Reports](https://keyauth.cc/app/?page=forms)
 - 🌐 [KeyAuth Dashboard](https://keyauth.cc/app/)
-
----
-
-**Made with ❤️ by the KeyAuth team**
