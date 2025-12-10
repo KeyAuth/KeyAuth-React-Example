@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+:root {
+  --background: rgba(13, 16, 16, 1);
+  --foreground: #ededed;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: rgba(13, 16, 16, 1);
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.bg-custom-back {
+  background-color: rgba(26, 26, 26, 1);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.border-custom {
+  border-color: rgba(18, 18, 18, 1);
+}
+
+.bg-custom-back-1 {
+  background-color: rgba(18, 18, 18, 1);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.bg-custom-back-lbl {
+  background-color: rgba(26, 26, 26, 1);
+}
