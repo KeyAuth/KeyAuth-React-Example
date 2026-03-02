@@ -49,7 +49,7 @@ KeyAuth React/Next.js TypeScript example application with full 2FA support for h
 
 ## **Bugs**
 
-If you are using our example with no significant changes and having problems, please report bugs here: https://keyauth.cc/app/?page=forms
+If you are using our example with no significant changes and having problems, please report bugs here: https://keyauth.fdback.io
 
 However, we do **NOT** provide support for adding KeyAuth to your project. If you can't figure this out, use Google or YouTube to learn more about React/Next.js development.
 
